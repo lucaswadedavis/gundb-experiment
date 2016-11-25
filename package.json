@@ -1,0 +1,24 @@
+{
+  "name": "react-gundb-experiment",
+  "version": "1.0.0",
+  "description": "An experiment with GunDB using a simple React webclient",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucaswadedavis/gundb-experiment.git"
+  },
+  "keywords": [
+    "gunDB",
+    "react"
+  ],
+  "author": "Luke Davis <lucaswadedavis@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.14.0",
+    "gun": "^0.3.94"
+  }
+}

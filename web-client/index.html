@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>GunDB Experiment</title>
+        <script src="https://fb.me/react-15.1.0.js"></script>
+        <script src="https://fb.me/react-dom-15.1.0.js"></script>
+        <script src="/gun.js"></script>
+
+    </head>
+    <body>
+        <div id="main"></div>
+
+        <script>
+            var gun = Gun(location.origin + '/gun');
+            var todo = gun.get('todo');
+
+            var App = React.createClass({
+                getInitialState() {
+                    return {
+                        items: {}
+                    }
+                },
+
+                componentDidMount() {
+                    todo.map((value, id) => {
+                        const items = Object.assign({}, this.state.items, {[id]: value});
+                        this.setState({items});
+                    });
+                },
+
+                onSubmit(e) {
+                    e.preventDefault();
+                    todo.path(Gun.text.random()).put(this.item.value);
+                    this.item.value = '';
+                },
+
+                render(){
+                    const items = Object.keys(this.state.items).map(i =>
+                        React.createElement("li", {key: i}, this.state.items[i])
+                    );
+
+                    const form = React.createElement("form", {onSubmit: this.onSubmit},
+                        React.createElement("input", {ref:(item) => { this.item = item; }}),
+                        React.createElement("input", {type:'submit',value:'add'}),
+                        React.createElement("ul", {}, items)
+                    );
+
+                    const header = React.createElement("h1", {}, "GunDB Experiment");
+
+                    return React.createElement("div", {}, header, form);
+                }
+            });
+
+            ReactDOM.render(React.createElement(App, {}),
+            document.getElementById('main'));
+
+        </script>
+    </body>
+</html>
